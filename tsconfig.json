@@ -2,7 +2,11 @@
     "extends": "./tsconfig.base.json",
     "compilerOptions": {
         "rootDir": "./src",
-        "outDir": "./out"
+        "outDir": "./out",
+        "lib": [
+            // needed to access fetch in Node 18, as a stop-gap till supported natively
+            "DOM"
+        ]
     },
     "include": [
         "./src"
