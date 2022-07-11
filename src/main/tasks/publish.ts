@@ -23,14 +23,8 @@ export class PublishTask implements Task {
     protected async publishFile(file: string) {
         console.info('Publishing', chalk.green(file));
         const { code, metadata } = await this.workdir.buildNodeFile(file);
-        const { name, version } = metadata;
-        if (!name) {
-            throw new Error(`Cannot publish ${file}: metadata.name is required`);
-        }
-        if (!version) {
-            throw new Error(`Cannot publish ${file}: metadata.version is required`);
-        }
-        const module = await this.api.getModuleByName(name);
+        const { channel, name, version } = metadata;
+        const module = await this.api.getModule(channel, name);
         if (module && module.versions.includes(version)) {
             console.info('  version', chalk.yellow(version), 'already exists — skipping');
             return;

@@ -8,8 +8,9 @@ export class ApiManager {
 
     @dep() private config!: ConfigManager;
 
-    async getModuleByName(name: string): Promise<Module | null> {
-        const { module } = await this.sendGet('/Registry/getModuleByName', {
+    async getModule(channel: string, name: string): Promise<Module | null> {
+        const { module } = await this.sendGet('/Registry/getModule', {
+            channel,
             name,
         });
         return module;
