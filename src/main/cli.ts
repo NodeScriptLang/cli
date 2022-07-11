@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import chalk from 'chalk';
 import { Command } from 'commander';
 import fs from 'fs';
 import * as path from 'path';
@@ -18,9 +19,14 @@ export function main() {
     program.command('publish')
         .description('publish modules to NodeScript registry')
         .option('-r, --root <root>', 'Root directory', process.cwd())
-        .action(opts => {
-            const app = new App(opts.root);
-            app.publishTask.run();
+        .action(async opts => {
+            try {
+                const app = new App(opts.root);
+                await app.init();
+                await app.publishTask.run();
+            } catch (err: any) {
+                console.error(chalk.red(err.message));
+            }
         });
 
     program.parse();

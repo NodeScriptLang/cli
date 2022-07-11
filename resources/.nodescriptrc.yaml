@@ -1,0 +1,3 @@
+# Specify which Node Definition files should be published
+nodes:
+  - out/nodes/**/*.js
