@@ -28,7 +28,7 @@ export class ConfigManager {
     options: CliOptions = this.getDefaultOptions();
 
     async init() {
-        await this.copyResources();
+        // await this.copyResources();
         await this.readOptions();
     }
 

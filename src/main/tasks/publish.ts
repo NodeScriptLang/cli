@@ -15,6 +15,9 @@ export class PublishTask implements Task {
 
     async run() {
         const files = await this.workdir.getNodeFiles();
+        if (!files.length) {
+            console.info(chalk.yellow('No files to publish.'));
+        }
         for (const file of files) {
             await this.publishFile(file);
         }
