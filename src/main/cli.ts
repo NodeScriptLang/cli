@@ -2,6 +2,7 @@
 
 import chalk from 'chalk';
 import { Command } from 'commander';
+import { config } from 'dotenv';
 import fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
@@ -19,8 +20,10 @@ export function main() {
     program.command('publish')
         .description('publish modules to NodeScript registry')
         .option('-r, --root <root>', 'Root directory', process.cwd())
+        .option('-e, --env <env>', 'Env file to use', '.env')
         .action(async opts => {
             try {
+                config({ path: opts.env });
                 const app = new App(opts.root);
                 await app.init();
                 await app.publishTask.run();

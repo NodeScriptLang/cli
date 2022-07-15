@@ -14,6 +14,7 @@ export class PublishTask implements Task {
     @dep({ key: 'rootDir' }) protected rootDir!: string;
 
     async run() {
+        console.info(`Publishing to `, chalk.green(this.config.options.apiUrl));
         const files = await this.workdir.getNodeFiles();
         if (!files.length) {
             console.info(chalk.yellow('No files to publish.'));
@@ -24,12 +25,12 @@ export class PublishTask implements Task {
     }
 
     protected async publishFile(file: string) {
-        console.info('Publishing', chalk.green(file));
+        console.info('  ', chalk.yellow(file));
         const { code, metadata } = await this.workdir.buildNodeFile(file);
         const { channel, name, version } = metadata;
         const module = await this.api.getModule(channel, name);
         if (module && module.versions.includes(version)) {
-            console.info('  version', chalk.yellow(version), 'already exists — skipping');
+            console.info('  - version', chalk.yellow(version), 'already exists — skipping');
             return;
         }
         await this.api.publishModule({
@@ -38,7 +39,7 @@ export class PublishTask implements Task {
             metadata,
             code,
         });
-        console.info('  version', chalk.yellow(version), 'published');
+        console.info('  - version', chalk.yellow(version), 'published');
     }
 
 }

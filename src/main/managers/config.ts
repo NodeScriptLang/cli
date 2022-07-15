@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import { config } from 'dotenv';
 import * as fs from 'fs';
 import glob from 'glob';
 import { dep } from 'mesh-ioc';
@@ -77,9 +76,6 @@ export class ConfigManager {
     }
 
     protected async readEnv() {
-        config({
-            path: this.envFile,
-        });
         for (const key of Object.keys(this.options)) {
             const envKey = 'NODESCRIPT_' + key.replace(/([A-Z])/g, '_$1').toUpperCase();
             const envValue = process.env[envKey];
