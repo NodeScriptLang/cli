@@ -29,6 +29,7 @@ export function main() {
                 await app.publishTask.run();
             } catch (err: any) {
                 console.error(chalk.red(err.message));
+                process.exit(1);
             }
         });
 
