@@ -30,7 +30,9 @@ export class PublishTask implements Task {
         const { channel, name, version } = metadata;
         const module = await this.api.getModule(channel, name);
         if (module && module.versions.includes(version)) {
-            console.info('  - version', chalk.yellow(version), 'already exists — skipping');
+            if (this.config.options.logLevel === 'debug') {
+                console.info('  - version', chalk.yellow(version), 'already exists — skipping');
+            }
             return;
         }
         await this.api.publishModule({

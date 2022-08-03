@@ -18,6 +18,7 @@ export interface CliOptions {
     apiUrl: string;
     apiUsername: string;
     apiToken: string;
+    logLevel: 'mute' | 'error' | 'info' | 'debug';
 }
 
 export class ConfigManager {
@@ -93,6 +94,7 @@ export class ConfigManager {
             apiUrl: 'https://nodescript.dev',
             apiUsername: '',
             apiToken: '',
+            logLevel: 'info',
         };
     }
 
