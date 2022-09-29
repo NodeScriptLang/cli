@@ -1,23 +1,9 @@
-import { NodeMetadata } from '@nodescript/core/types';
+import { ModuleSpec } from '@nodescript/core/types';
 
-export interface Module {
-    id: string;
-    label: string;
-    activeVersion: string;
-    versions: string[];
-}
-
-export interface Revision {
+export interface PublishEsmSpec {
     moduleId: string;
-    version: string;
-    code?: string;
-    source?: string;
-}
-
-export interface PublishModuleSpec {
-    type: 'graph' | 'esm';
-    comment: string;
-    metadata: NodeMetadata;
-    code: string;
-    source?: string;
+    moduleSpec: ModuleSpec;
+    computeCode: string;
+    bundleCode: string;
+    sourceUrl: string;
 }

@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 
-import { Mesh } from 'mesh-ioc';
+import { Mesh } from '@flexent/mesh';
 
 import { ApiManager } from './managers/api.js';
+import { BuilderManager } from './managers/builder.js';
 import { ConfigManager } from './managers/config.js';
-import { WorkdirManager } from './managers/workdir.js';
 import { PublishTask } from './tasks/publish.js';
 
 export class App {
@@ -16,7 +16,7 @@ export class App {
         this.mesh.constant('rootDir', rootDir);
         this.mesh.service(ConfigManager);
         this.mesh.service(ApiManager);
-        this.mesh.service(WorkdirManager);
+        this.mesh.service(BuilderManager);
         this.mesh.service(PublishTask);
     }
 

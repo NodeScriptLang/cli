@@ -1,7 +1,7 @@
+import { dep } from '@flexent/mesh';
 import chalk from 'chalk';
 import * as fs from 'fs';
 import glob from 'glob';
-import { dep } from 'mesh-ioc';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { promisify } from 'util';

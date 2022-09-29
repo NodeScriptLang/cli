@@ -1,6 +1,6 @@
-import { dep } from 'mesh-ioc';
+import { dep } from '@flexent/mesh';
 
-import { Module, PublishModuleSpec, Revision } from '../../types.js';
+import { PublishEsmSpec } from '../../types.js';
 import { ConfigManager } from './config.js';
 
 // TODO consider publishing the Hub Proto package
@@ -8,25 +8,10 @@ export class ApiManager {
 
     @dep() private config!: ConfigManager;
 
-    async getModule(channel: string, name: string): Promise<Module | null> {
-        const { module } = await this.sendGet('/Registry/getModule', {
-            channel,
-            name,
-        });
-        return module;
-    }
-
-    async getRevision(moduleId: string, version: string): Promise<Revision | null> {
-        const { revision } = await this.sendGet('/Registry/getRevision', {
-            moduleId,
-            version,
-        });
-        return revision;
-    }
-
-    async publishModule(spec: PublishModuleSpec): Promise<{ module: Module; revision: Revision }> {
-        const { module, revision } = await this.sendPost('/Registry/publishModule', spec);
-        return { module, revision };
+    async publishEsm(spec: PublishEsmSpec) {
+        console.log(spec);
+        const res = await this.sendPost('/Registry/publishEsm', spec);
+        console.log('>>>>>>>', res);
     }
 
     protected async sendGet(path: string, params: Record<string, any> = {}): Promise<any> {
