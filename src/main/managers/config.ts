@@ -7,25 +7,18 @@ import { fileURLToPath } from 'url';
 import { promisify } from 'util';
 import Yaml from 'yaml';
 
+import { CliOptions, CliOptionsSchema } from '../options.js';
 import { isFileExists } from '../util.js';
 
 const globAsync = promisify(glob);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export interface CliOptions {
-    nodes: string[];
-    apiUrl: string;
-    apiUsername: string;
-    apiToken: string;
-    logLevel: 'mute' | 'error' | 'info' | 'debug';
-}
-
 export class ConfigManager {
 
     @dep({ key: 'rootDir' }) protected rootDir!: string;
 
-    options: CliOptions = this.getDefaultOptions();
+    options: CliOptions = CliOptionsSchema.decode({});
 
     async init() {
         // await this.copyResources();
@@ -69,10 +62,7 @@ export class ConfigManager {
         try {
             const text = await fs.promises.readFile(file, 'utf-8');
             const opts = Yaml.parse(text);
-            this.options = {
-                ...this.getDefaultOptions(),
-                ...opts,
-            };
+            this.options = CliOptionsSchema.decode(opts);
         } catch (err) { }
     }
 
@@ -84,18 +74,6 @@ export class ConfigManager {
                 (this.options as any)[key] = envValue;
             }
         }
-    }
-
-    protected getDefaultOptions(): CliOptions {
-        return {
-            nodes: [
-                'out/main/nodes/**/*.js'
-            ],
-            apiUrl: 'https://nodescript.dev',
-            apiUsername: '',
-            apiToken: '',
-            logLevel: 'info',
-        };
     }
 
 }

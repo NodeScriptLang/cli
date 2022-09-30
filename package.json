@@ -34,6 +34,7 @@
         "@flexent/eslint-config": "^1.0.3",
         "@flexent/logger": "^1.2.1",
         "@flexent/mesh": "^3.0.1",
+        "@flexent/schema": "^5.1.0",
         "@nodescript/core": "^1.2.2",
         "@types/glob": "^7.2.0",
         "chalk": "^5.0.1",

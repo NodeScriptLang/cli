@@ -1,9 +1,10 @@
 import { ModuleSpec } from '@nodescript/core/types';
 
 export interface PublishEsmSpec {
-    moduleId: string;
+    channelId: string;
+    moduleName: string;
     moduleSpec: ModuleSpec;
     computeCode: string;
-    bundleCode: string;
-    sourceUrl: string;
+    bundleCode?: string;
+    sourceUrl?: string;
 }

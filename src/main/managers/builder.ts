@@ -1,40 +1,18 @@
-import { dep } from '@flexent/mesh';
+import { createHash } from 'node:crypto';
+
 import { ModuleSpecSchema } from '@nodescript/core/schema';
 import { evalEsmModule } from '@nodescript/core/util';
 import { build } from 'esbuild';
-import glob from 'glob';
-import { promisify } from 'util';
-
-import { ConfigManager } from './config.js';
-
-const globAsync = promisify(glob);
 
 export class BuilderManager {
 
-    @dep({ key: 'rootDir' }) protected rootDir!: string;
-    @dep() protected config!: ConfigManager;
-
-    async getNodeFiles() {
-        const res: string[] = [];
-        for (const pattern of this.config.options.nodes) {
-            const files = await globAsync(pattern, {
-                cwd: this.rootDir,
-            });
-            for (const file of files) {
-                if (!res.includes(file)) {
-                    res.push(file);
-                }
-            }
-        }
-        return res;
-    }
-
-    async buildNodeFile(file: string) {
+    async buildModuleFile(file: string) {
         const computeCode = await this.compileCompute(file);
         const moduleCode = await this.compileModuleJson(file);
         const { module } = await evalEsmModule(moduleCode);
         const moduleSpec = ModuleSpecSchema.decode(module);
-        return { computeCode, moduleSpec };
+        const computeHash = createHash('sha256').update(computeCode).digest('hex');
+        return { computeCode, computeHash, moduleSpec };
     }
 
     private async compileCompute(file: string) {
