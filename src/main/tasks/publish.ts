@@ -1,5 +1,3 @@
-import path from 'node:path';
-
 import { dep } from '@flexent/mesh';
 import chalk from 'chalk';
 
@@ -24,18 +22,18 @@ export class PublishTask implements Task {
     }
 
     protected async publishModule(mod: ModuleDescriptor) {
-        const { file, channelId, sourceUrl } = mod;
+        const { file, sourceUrl } = mod;
         console.info('  ', chalk.yellow(file));
         try {
             const res = await this.builder.buildModuleFile(file);
             const { moduleSpec, computeCode } = res;
-            const moduleName = path.basename(file).replace(/\.ts$|\.js$/i, '');
+            moduleSpec.attributes = {
+                ...moduleSpec.attributes,
+                sourceUrl: sourceUrl.replace(/\{file\}/ig, file),
+            };
             await this.api.publishEsm({
-                channelId,
-                moduleName,
                 moduleSpec,
                 computeCode,
-                sourceUrl: sourceUrl.replace(/\{file\}/ig, file),
             });
             console.info(chalk.green('    published'));
         } catch (error: any) {

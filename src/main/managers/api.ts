@@ -13,7 +13,7 @@ export class ApiManager {
     }
 
     protected async sendGet(path: string, params: Record<string, any> = {}): Promise<any> {
-        const url = new URL(this.config.options.apiUrl + path);
+        const url = new URL(path.replace(/^\//, ''), this.config.options.apiUrl);
         for (const [k, v] of Object.entries(params)) {
             url.searchParams.append(k, v);
         }
@@ -28,7 +28,7 @@ export class ApiManager {
     }
 
     protected async sendPost(path: string, params: Record<string, any> = {}): Promise<any> {
-        const url = new URL(this.config.options.apiUrl + path);
+        const url = new URL(path.replace(/^\//, ''), this.config.options.apiUrl);
         const authorization = this.getAuthorization();
         const res = await fetch(url, {
             method: 'POST',
