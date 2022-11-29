@@ -1,4 +1,4 @@
-import { dep } from '@flexent/mesh';
+import { dep } from '@nodescript/mesh';
 import glob from 'glob';
 import { promisify } from 'util';
 

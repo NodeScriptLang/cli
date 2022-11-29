@@ -1,4 +1,4 @@
-import { dep } from '@flexent/mesh';
+import { dep } from '@nodescript/mesh';
 import chalk from 'chalk';
 
 import { ApiManager } from '../managers/api.js';

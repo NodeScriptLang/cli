@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { Mesh } from '@flexent/mesh';
+import { Mesh } from '@nodescript/mesh';
 
 import { ApiManager } from './managers/api.js';
 import { BuilderManager } from './managers/builder.js';

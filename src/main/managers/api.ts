@@ -1,4 +1,4 @@
-import { dep } from '@flexent/mesh';
+import { dep } from '@nodescript/mesh';
 
 import { PublishEsmSpec } from '../../types.js';
 import { ConfigManager } from './config.js';
