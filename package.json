@@ -31,10 +31,10 @@
         "lint"
     ],
     "dependencies": {
+        "@nodescript/core": "^3.6.0",
         "@nodescript/logger": "^1.4.1",
         "@nodescript/mesh": "^3.1.3",
-        "@nodescript/schema": "^5.2.1",
-        "@nodescript/core": "^3.2.4",
+        "@nodescript/schema": "^5.2.2",
         "@types/glob": "^7.2.0",
         "chalk": "^5.0.1",
         "commander": "^9.3.0",
