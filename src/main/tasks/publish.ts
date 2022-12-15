@@ -1,5 +1,5 @@
-import { dep } from 'mesh-ioc';
 import chalk from 'chalk';
+import { dep } from 'mesh-ioc';
 
 import { ApiManager } from '../managers/api.js';
 import { BuilderManager } from '../managers/builder.js';

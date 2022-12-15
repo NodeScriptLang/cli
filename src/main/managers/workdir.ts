@@ -1,5 +1,5 @@
-import { dep } from 'mesh-ioc';
 import glob from 'glob';
+import { dep } from 'mesh-ioc';
 import { promisify } from 'util';
 
 import { ConfigManager } from './config.js';
