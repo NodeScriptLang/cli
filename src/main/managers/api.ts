@@ -1,4 +1,4 @@
-import { dep } from '@nodescript/mesh';
+import { dep } from 'mesh-ioc';
 
 import { PublishEsmSpec } from '../../types.js';
 import { ConfigManager } from './config.js';

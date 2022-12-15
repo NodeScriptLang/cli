@@ -1,4 +1,4 @@
-import { dep } from '@nodescript/mesh';
+import { dep } from 'mesh-ioc';
 import glob from 'glob';
 import { promisify } from 'util';
 

@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { Mesh } from '@nodescript/mesh';
+import { Mesh } from 'mesh-ioc';
 
 import { ApiManager } from './managers/api.js';
 import { BuilderManager } from './managers/builder.js';
