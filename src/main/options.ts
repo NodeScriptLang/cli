@@ -20,6 +20,7 @@ export interface CliOptions {
     apiUrl: string;
     apiUsername: string;
     apiToken: string;
+    workspaceId: string;
 }
 
 export const CliOptionsSchema = new Schema<CliOptions>({
@@ -32,5 +33,6 @@ export const CliOptionsSchema = new Schema<CliOptions>({
         apiUrl: { type: 'string', default: 'https://hub.nodescript.dev' },
         apiUsername: { type: 'string' },
         apiToken: { type: 'string' },
+        workspaceId: { type: 'string' },
     }
 });

@@ -32,6 +32,7 @@ export class PublishTask implements Task {
                 sourceUrl: sourceUrl.replace(/\{file\}/ig, file),
             };
             await this.api.publishEsm({
+                workspaceId: this.config.options.workspaceId,
                 moduleSpec,
                 computeCode,
             });
