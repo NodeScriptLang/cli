@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import { dep } from 'mesh-ioc';
 
+import { ModuleInfo } from '../../types.js';
 import { ApiManager } from '../managers/api.js';
 import { BuilderManager } from '../managers/builder.js';
 import { ConfigManager } from '../managers/config.js';
@@ -16,17 +17,23 @@ export class PublishTask implements Task {
 
     async run() {
         console.info(`Publishing to `, chalk.green(this.config.options.apiUrl));
+        const map = await this.fetchModuleMap();
         for await (const mod of this.workdir.readModuleDescriptors()) {
-            await this.publishModule(mod);
+            await this.publishModule(map, mod);
         }
     }
 
-    protected async publishModule(mod: ModuleDescriptor) {
+    private async publishModule(existingModules: Map<string, ModuleInfo>, mod: ModuleDescriptor) {
         const { file, sourceUrl } = mod;
         console.info('  ', chalk.yellow(file));
         try {
             const res = await this.builder.buildModuleFile(file);
             const { moduleSpec, computeCode } = res;
+            const existing = existingModules.get(moduleSpec.moduleName);
+            if (existing && existing.refs[moduleSpec.version]) {
+                // Skipping
+                return;
+            }
             moduleSpec.attributes = {
                 ...moduleSpec.attributes,
                 sourceUrl: sourceUrl.replace(/\{file\}/ig, file),
@@ -43,6 +50,16 @@ export class PublishTask implements Task {
             }
             console.error(chalk.yellow(error.status), chalk.red(error.message));
         }
+    }
+
+    private async fetchModuleMap() {
+        const map = new Map<string, ModuleInfo>();
+        const { workspaceId } = this.config.options;
+        const existingModules = await this.api.getWorkspaceModules(workspaceId);
+        for (const module of existingModules) {
+            map.set(module.moduleSpec.moduleName, module);
+        }
+        return map;
     }
 
 }

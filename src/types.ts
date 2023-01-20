@@ -6,3 +6,9 @@ export interface PublishEsmSpec {
     computeCode: string;
     bundleCode?: string;
 }
+
+export interface ModuleInfo {
+    id: string;
+    moduleSpec: ModuleSpec;
+    refs: Record<string, string>;
+}

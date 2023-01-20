@@ -1,12 +1,19 @@
 import { dep } from 'mesh-ioc';
 
-import { PublishEsmSpec } from '../../types.js';
+import { ModuleInfo, PublishEsmSpec } from '../../types.js';
 import { ConfigManager } from './config.js';
 
 // TODO consider publishing the Hub Proto package
 export class ApiManager {
 
     @dep() private config!: ConfigManager;
+
+    async getWorkspaceModules(workspaceId: string): Promise<ModuleInfo[]> {
+        const { modules } = await this.sendGet('/Registry/getWorkspaceModules', {
+            workspaceId,
+        });
+        return modules;
+    }
 
     async publishEsm(spec: PublishEsmSpec) {
         return await this.sendPost('/Registry/publishEsm', { spec });
