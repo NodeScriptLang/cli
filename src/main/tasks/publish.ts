@@ -25,7 +25,6 @@ export class PublishTask implements Task {
 
     private async publishModule(existingModules: Map<string, ModuleInfo>, mod: ModuleDescriptor) {
         const { file, sourceUrl } = mod;
-        console.info('  ', chalk.yellow(file));
         try {
             const res = await this.builder.buildModuleFile(file);
             const { moduleSpec, computeCode } = res;
@@ -34,6 +33,7 @@ export class PublishTask implements Task {
                 // Skipping
                 return;
             }
+            console.info('  ', chalk.yellow(file));
             moduleSpec.attributes = {
                 ...moduleSpec.attributes,
                 sourceUrl: sourceUrl.replace(/\{file\}/ig, file),
