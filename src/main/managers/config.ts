@@ -4,13 +4,10 @@ import glob from 'glob';
 import { dep } from 'mesh-ioc';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { promisify } from 'util';
 import Yaml from 'yaml';
 
 import { CliOptions, CliOptionsSchema } from '../options.js';
 import { isFileExists } from '../util.js';
-
-const globAsync = promisify(glob);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -35,7 +32,7 @@ export class ConfigManager {
 
     protected async copyResources() {
         const resourcesDir = path.join(__dirname, '../../../resources');
-        const resources = await globAsync('**/*', {
+        const resources = await glob('**/*', {
             cwd: resourcesDir,
             dot: true,
         });

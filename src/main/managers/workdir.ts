@@ -1,10 +1,7 @@
 import glob from 'glob';
 import { dep } from 'mesh-ioc';
-import { promisify } from 'util';
 
 import { ConfigManager } from './config.js';
-
-const globAsync = promisify(glob);
 
 export interface ModuleDescriptor {
     file: string;
@@ -19,7 +16,7 @@ export class WorkdirManager {
     async *readModuleDescriptors(): AsyncIterable<ModuleDescriptor> {
         for (const group of this.config.options.modules) {
             const { pattern, sourceUrl } = group;
-            const files = await globAsync(pattern, {
+            const files = await glob(pattern, {
                 cwd: this.rootDir,
             });
             for (const file of files) {

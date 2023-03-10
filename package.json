@@ -39,7 +39,7 @@
         "chalk": "^5.0.1",
         "commander": "^9.3.0",
         "dotenv": "^16.0.2",
-        "glob": "^8.0.3",
+        "glob": "^9.2.1",
         "mesh-ioc": "^3.1.4",
         "reflect-metadata": "^0.1.13",
         "yaml": "^2.1.1"
