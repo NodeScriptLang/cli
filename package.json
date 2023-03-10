@@ -31,8 +31,8 @@
         "lint"
     ],
     "dependencies": {
-        "@nodescript/bundler": "^1.2.0",
-        "@nodescript/core": "^5.8.1",
+        "@nodescript/bundler": "^1.2.1",
+        "@nodescript/core": "^5.9.1",
         "@nodescript/logger": "^1.4.1",
         "airtight": "^5.2.3",
         "chalk": "^5.0.1",
