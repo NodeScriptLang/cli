@@ -18,7 +18,6 @@ export const CliModuleGroupSchema = new Schema<CliModuleGroup>({
 export interface CliOptions {
     modules: CliModuleGroup[];
     apiUrl: string;
-    apiUsername: string;
     apiToken: string;
     workspaceId: string;
 }
@@ -31,7 +30,6 @@ export const CliOptionsSchema = new Schema<CliOptions>({
             items: CliModuleGroupSchema.schema,
         },
         apiUrl: { type: 'string', default: 'https://hub.nodescript.dev' },
-        apiUsername: { type: 'string' },
         apiToken: { type: 'string' },
         workspaceId: { type: 'string' },
     }

@@ -66,12 +66,11 @@ export class ApiManager {
     }
 
     protected getAuthorization() {
-        const username = this.config.options.apiUsername;
-        const password = this.config.options.apiToken;
-        if (!username || !password || username.startsWith('<') || password.startsWith('<')) {
-            throw new Error('Please setup NODESCRIPT_API_USERNAME and NODESCRIPT_API_PASSWORD in .env file');
+        const token = this.config.options.apiToken;
+        if (!token) {
+            throw new Error('Please setup NODESCRIPT_API_TOKEN in .env file');
         }
-        return `Basic ${Buffer.from(username + ':' + password).toString('base64')}`;
+        return `Bearer ${token}`;
     }
 
 }
