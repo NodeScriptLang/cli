@@ -33,7 +33,6 @@ export class PublishTask implements Task {
                 // Skipping
                 return;
             }
-            console.info('  ', chalk.yellow(file));
             moduleSpec.attributes = {
                 ...moduleSpec.attributes,
                 sourceUrl: sourceUrl.replace(/\{file\}/ig, file),
@@ -43,11 +42,13 @@ export class PublishTask implements Task {
                 moduleSpec,
                 computeCode,
             });
+            console.info('  ', chalk.yellow(file));
             console.info(chalk.green('    published'));
         } catch (error: any) {
             if (error.status === 409) {
                 return;
             }
+            console.info('  ', chalk.yellow(file));
             console.error(chalk.yellow(error.status), chalk.red(error.message));
         }
     }
