@@ -4,6 +4,7 @@ export interface CliModuleGroup {
     pattern: string;
     channelId: string;
     sourceUrl: string;
+    channel: string;
 }
 
 export const CliModuleGroupSchema = new Schema<CliModuleGroup>({
@@ -12,6 +13,10 @@ export const CliModuleGroupSchema = new Schema<CliModuleGroup>({
         pattern: { type: 'string' },
         channelId: { type: 'string' },
         sourceUrl: { type: 'string' },
+        channel: {
+            type: 'string',
+            default: 'universe',
+        },
     }
 });
 

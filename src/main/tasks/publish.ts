@@ -24,7 +24,7 @@ export class PublishTask implements Task {
     }
 
     private async publishModule(existingModules: Map<string, ModuleInfo>, mod: ModuleDescriptor) {
-        const { file, sourceUrl } = mod;
+        const { file, sourceUrl, channel } = mod;
         try {
             const res = await this.builder.buildModuleFile(file);
             const { moduleSpec, computeCode } = res;
@@ -41,6 +41,7 @@ export class PublishTask implements Task {
                 workspaceId: this.config.options.workspaceId,
                 moduleSpec,
                 computeCode,
+                channel,
             });
             console.info('  ', chalk.yellow(file));
             console.info(chalk.green('    published'));

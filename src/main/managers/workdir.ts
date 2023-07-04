@@ -6,6 +6,7 @@ import { ConfigManager } from './config.js';
 export interface ModuleDescriptor {
     file: string;
     sourceUrl: string;
+    channel: string;
 }
 
 export class WorkdirManager {
@@ -15,12 +16,12 @@ export class WorkdirManager {
 
     async *readModuleDescriptors(): AsyncIterable<ModuleDescriptor> {
         for (const group of this.config.options.modules) {
-            const { pattern, sourceUrl } = group;
+            const { pattern, sourceUrl, channel } = group;
             const files = await glob(pattern, {
                 cwd: this.rootDir,
             });
             for (const file of files) {
-                yield { file, sourceUrl };
+                yield { file, sourceUrl, channel };
             }
         }
     }

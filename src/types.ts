@@ -5,6 +5,7 @@ export interface PublishEsmSpec {
     moduleSpec: ModuleSpec;
     computeCode: string;
     bundleCode?: string;
+    channel?: string;
 }
 
 export interface ModuleInfo {
