@@ -21,7 +21,6 @@ export function main() {
         .description('publish modules to NodeScript registry')
         .option('-r, --root <root>', 'Root directory', process.cwd())
         .option('-e, --env <env>', 'Env file to use', '.env')
-        .option('--log <logLevel>', 'Logging level', 'info')
         .action(async opts => {
             try {
                 config({ path: opts.env });
