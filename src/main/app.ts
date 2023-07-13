@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { Mesh } from 'mesh-ioc';
+import { dep, Mesh } from 'mesh-ioc';
 
 import { ApiManager } from './managers/api.js';
 import { BuilderManager } from './managers/builder.js';
@@ -10,10 +10,13 @@ import { PublishTask } from './tasks/publish.js';
 
 export class App {
 
+    @dep() publishTask!: PublishTask;
+
     mesh: Mesh;
 
     constructor(readonly rootDir: string) {
         this.mesh = new Mesh('App');
+        this.mesh.connect(this);
         this.mesh.constant('rootDir', rootDir);
         this.mesh.service(ApiManager);
         this.mesh.service(BuilderManager);
@@ -24,10 +27,6 @@ export class App {
 
     async init() {
         await this.mesh.resolve(ConfigManager).init();
-    }
-
-    get publishTask() {
-        return this.mesh.resolve(PublishTask);
     }
 
 }
