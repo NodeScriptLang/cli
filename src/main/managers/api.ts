@@ -9,14 +9,14 @@ export class ApiManager {
     @dep() private config!: ConfigManager;
 
     async getWorkspaceModules(workspaceId: string): Promise<ModuleInfo[]> {
-        const { modules } = await this.sendGet('/Registry/getWorkspaceModules', {
+        const { modules } = await this.sendGet('/Module/getWorkspaceModules', {
             workspaceId,
         });
         return modules;
     }
 
     async publishEsm(spec: PublishEsmSpec) {
-        return await this.sendPost('/Registry/publishEsm', { spec });
+        return await this.sendPost('/Module/publishEsm', { spec });
     }
 
     protected async sendGet(path: string, params: Record<string, any> = {}): Promise<any> {
