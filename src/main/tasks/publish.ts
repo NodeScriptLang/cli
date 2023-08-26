@@ -24,7 +24,7 @@ export class PublishTask implements Task {
     }
 
     private async publishModule(existingModules: Map<string, ModuleInfo>, mod: ModuleDescriptor) {
-        const { file, sourceUrl, channel } = mod;
+        const { file, sourceUrl, channel, visibility } = mod;
         try {
             const res = await this.builder.buildModuleFile(file);
             const { moduleSpec, computeCode } = res;
@@ -37,6 +37,7 @@ export class PublishTask implements Task {
                 workspaceId: this.config.options.workspaceId,
                 moduleSpec,
                 computeCode,
+                visibility,
                 channel,
                 sourceUrl: sourceUrl.replace(/\{file\}/ig, file),
             });

@@ -1,10 +1,13 @@
 import { Schema } from 'airtight';
 
+import { ModuleVisibility } from '../types.js';
+
 export interface CliModuleGroup {
     pattern: string;
     channelId: string;
     sourceUrl: string;
     channel: string;
+    visibility: ModuleVisibility;
 }
 
 export const CliModuleGroupSchema = new Schema<CliModuleGroup>({
@@ -16,6 +19,11 @@ export const CliModuleGroupSchema = new Schema<CliModuleGroup>({
         channel: {
             type: 'string',
             default: 'universe',
+        },
+        visibility: {
+            type: 'string',
+            enum: ['private', 'public'],
+            default: 'public',
         },
     }
 });
