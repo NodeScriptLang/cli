@@ -33,15 +33,12 @@ export class PublishTask implements Task {
                 // Skipping
                 return;
             }
-            moduleSpec.attributes = {
-                ...moduleSpec.attributes,
-                sourceUrl: sourceUrl.replace(/\{file\}/ig, file),
-            };
             await this.api.publishEsm({
                 workspaceId: this.config.options.workspaceId,
                 moduleSpec,
                 computeCode,
                 channel,
+                sourceUrl: sourceUrl.replace(/\{file\}/ig, file),
             });
             console.info('  ', chalk.yellow(file));
             console.info(chalk.green('    published'));
