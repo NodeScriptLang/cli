@@ -1,6 +1,6 @@
 {
     "name": "@nodescript/cli",
-    "version": "1.5.12",
+    "version": "1.5.13",
     "type": "module",
     "description": "NodeScript CLI",
     "exports": {
