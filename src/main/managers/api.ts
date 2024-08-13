@@ -3,7 +3,6 @@ import { dep } from 'mesh-ioc';
 import { ModuleInfo, PublishEsmSpec } from '../../types.js';
 import { ConfigManager } from './config.js';
 
-// TODO consider publishing the Hub Proto package
 export class ApiManager {
 
     @dep() private config!: ConfigManager;
