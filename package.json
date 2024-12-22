@@ -39,7 +39,7 @@
         "commander": "^9.3.0",
         "dotenv": "^16.0.2",
         "glob": "^9.2.1",
-        "mesh-ioc": "^3.3.1",
+        "mesh-ioc": "^4.0.1",
         "reflect-metadata": "^0.1.13",
         "yaml": "^2.1.1"
     },
