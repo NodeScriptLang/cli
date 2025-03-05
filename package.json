@@ -32,7 +32,7 @@
     ],
     "dependencies": {
         "@nodescript/bundler": "^1.4.0",
-        "@nodescript/core": "^7.25.1",
+        "@nodescript/core": "^7.25.2",
         "@nodescript/logger": "^2.0.6",
         "airtight": "^5.7.2",
         "chalk": "^5.0.1",
